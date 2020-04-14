@@ -1,0 +1,23 @@
+Service Information
+service: notes-service
+stage: dev
+region: us-east-1
+stack: notes-service-dev
+resources: 44
+api keys:
+  None
+endpoints:
+  POST - https://zoblmxa06a.execute-api.us-east-1.amazonaws.com/dev/notes
+  GET - https://zoblmxa06a.execute-api.us-east-1.amazonaws.com/dev/notes/{id}
+  GET - https://zoblmxa06a.execute-api.us-east-1.amazonaws.com/dev/notes
+  PUT - https://zoblmxa06a.execute-api.us-east-1.amazonaws.com/dev/notes/{id}
+  DELETE - https://zoblmxa06a.execute-api.us-east-1.amazonaws.com/dev/notes/{id}
+functions:
+  create: notes-service-dev-create
+  get: notes-service-dev-get
+  list: notes-service-dev-list
+  update: notes-service-dev-update
+  delete: notes-service-dev-delete
+layers:
+  None
+Serverless: Run the "serverless" command to setup monitoring, troubleshooting and testing.
