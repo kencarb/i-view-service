@@ -1,0 +1,116 @@
+# https://serverless-stack.com/chapters/setup-the-serverless-framework.html
+
+service: notes-service
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+
+# Create an optimized package for our functions
+package:
+  individually: true
+
+plugins:
+#  - serverless-bundle # Package our functions with Webpack
+#  - serverless-offline
+#  - serverless-dotenv-plugin # Load .env as environment variables
+  - serverless-pseudo-parameters
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+
+# you can overwrite defaults here
+# REF - https://serverless.com/framework/docs/providers/aws/guide/variables/
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:us-east-1:028821943969:table/notes-service-dev"
+  
+  environment:
+    NOTES_TABLE: ${self:service}-${self:provider.stage}
+    NOTES_BUCKET: ${self:service}-${self:provider.stage}-#{AWS::AccountId}-${self:provider.region}
+    NOTES_USER_POOL: ${self:service}-${self:provider.stage}-user-pool
+    SES_SOURCE_ARN: arn:aws:ses:${self:provider.region}:#{AWS::AccountId}:identity/kencarb@gmail.com
+    NOTES_USER_POOL_CLIENT: ${self:service}-${self:provider.stage}-user-pool-client
+    NOTES_USER_POOL_DOMAIN: ${self:service}-${self:provider.stage}-#{AWS::AccountId}
+    NOTES_IDENTITY_POOL: ${self:service}-${self:provider.stage}-identity-pool
+
+functions:
+  create:
+    # Defines an HTTP API endpoint that calls the main function in create.js
+    # - path: url path is /notes
+    # - method: POST request
+    # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
+    #     domain api call
+    # - authorizer: authenticate using the AWS IAM role
+    handler: api/create.main
+    events:
+      - http:
+          path: notes
+          method: post
+          cors: true
+          authorizer: aws_iam
+  get:
+    # Defines an HTTP API endpoint that calls the main function in get.js
+    # - path: url path is /notes/{id}
+    # - method: GET request
+    handler: api/get.main
+    events:
+      - http:
+          path: notes/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
+  list:
+    # Defines an HTTP API endpoint that calls the main function in list.js
+    # - path: url path is /notes
+    # - method: GET request
+    handler: api/list.main
+    events:
+      - http:
+          path: notes
+          method: get
+          cors: true
+          authorizer: aws_iam
+  update:
+    # Defines an HTTP API endpoint that calls the main function in update.js
+    # - path: url path is /notes/{id}
+    # - method: PUT request
+    handler: api/update.main
+    events:
+      - http:
+          path: notes/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
+  delete:
+    # Defines an HTTP API endpoint that calls the main function in delete.js
+    # - path: url path is /notes/{id}
+    # - method: DELETE request
+    handler: api/delete.main
+    events:
+      - http:
+          path: notes/{id}
+          method: delete
+          cors: true
+          authorizer: aws_iam
+
+resources:
+  - ${file(resources/dynamodb-s3-storage.yml)}
+  - ${file(resources/cognito-user-pool.yml)}
+  - ${file(resources/api-gateway-errors.yml)}
+  - ${file(resources/cognito-identity-pool.yml)}

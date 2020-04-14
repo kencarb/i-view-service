@@ -1,0 +1,23 @@
+{
+  "name": "notes-service",
+  "version": "1.0.0",
+  "description": "api services for notes app",
+  "main": "api/hello.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/notes-app"
+  },
+  "author": "kc",
+  "license": "ISC",
+  "devDependencies": {
+    "aws-sdk": "^2.656.0",
+    "jest": "^25.1.0"
+  },
+  "dependencies": {
+    "serverless-pseudo-parameters": "^2.5.0",
+    "uuid": "^7.0.1"
+  }
+}

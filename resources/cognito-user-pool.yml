@@ -1,0 +1,35 @@
+Resources:
+  NotesCognitoUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      AutoVerifiedAttributes:
+        - email
+      EmailConfiguration:
+        EmailSendingAccount: DEVELOPER
+        SourceArn: ${self:provider.environment.SES_SOURCE_ARN}
+      UsernameAttributes:
+        - email
+      UserPoolName: ${self:provider.environment.NOTES_USER_POOL}
+      VerificationMessageTemplate:
+        DefaultEmailOption: CONFIRM_WITH_CODE
+#        EmailVerificationSubject: 'Your verification link'
+#        EmailVerificationMessage: 'Please click the link below to verify your email address. {##Verify Email##}' # fails because {####} is required
+  NotesCognitoUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties: 
+      ClientName: ${self:provider.environment.NOTES_USER_POOL_CLIENT}
+      GenerateSecret: false
+      PreventUserExistenceErrors: ENABLED
+      RefreshTokenValidity: 7
+      UserPoolId: !Ref NotesCognitoUserPool
+  NotesCognitoUserPoolDomain:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+      Domain: ${self:provider.environment.NOTES_USER_POOL_DOMAIN}
+      UserPoolId: !Ref NotesCognitoUserPool
+
+Outputs:
+  UserPoolId:
+    Value: !Ref NotesCognitoUserPool
+  UserPoolClient:
+    Value: !Ref NotesCognitoUserPoolClient

@@ -1,0 +1,49 @@
+Resources:
+  NotesDynamoDbTable:
+    Type: 'AWS::DynamoDB::Table'
+    DeletionPolicy: Delete
+    Properties:
+      AttributeDefinitions:
+        -
+          AttributeName: "userid"
+          AttributeType: "S"   
+        -
+          AttributeName: "noteid"
+          AttributeType: "S"   
+      KeySchema:
+        -
+          AttributeName: "userid"
+          KeyType: "HASH"
+        -
+          AttributeName: "noteid"
+          KeyType: "RANGE"
+      BillingMode: PAY_PER_REQUEST
+      StreamSpecification:
+        StreamViewType: "NEW_AND_OLD_IMAGES"
+      TableName: ${self:provider.environment.NOTES_TABLE}
+  NotesS3Bucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      BucketName: ${self:provider.environment.NOTES_BUCKET}
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      CorsConfiguration:
+        CorsRules:
+        - AllowedHeaders: ['*']
+          AllowedOrigins: ['*']
+          AllowedMethods: [GET, PUT, POST, HEAD, DELETE]
+          MaxAge: '3000'
+
+Outputs:
+  DynamoDbTable:
+    Value: !Ref NotesDynamoDbTable
+  S3Bucket:
+    Value: !Ref NotesS3Bucket
