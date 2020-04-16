@@ -22,4 +22,4 @@ module.exports.main = async(event, context) => {
         console.log(e);
         return responseLib.failure({ status: false });
     }
-}
+};

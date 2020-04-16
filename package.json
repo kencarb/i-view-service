@@ -8,12 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/notes-app"
+    "url": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/notes-service"
   },
   "author": "kc",
   "license": "ISC",
   "devDependencies": {
     "aws-sdk": "^2.656.0",
+    "cfn": "^1.8.1",
+    "got": "^10.7.0",
     "jest": "^25.1.0"
   },
   "dependencies": {
