@@ -11,12 +11,13 @@ module.exports.main = async(event, context) => {
         },
         // 'UpdateExpression' defines the attributes to be updated
         // 'ExpressionAttributeValues' defines the value in the update expression
-        UpdateExpression: "SET content = :content, attachment = :attachment, interviewee = :interviewee, skills = :skills",
+        UpdateExpression: "SET content = :content, attachment = :attachment, interviewee = :interviewee, skills = :skills, updatedAt = :updatedAt",
         ExpressionAttributeValues: {
             ":attachment": data.attachment || null,
             ":content": data.content || null,
             ":interviewee": data.interviewee || null,
-            ":skills": data.skills || null
+            ":skills": data.skills || null,
+            ":updatedAt": Date.now()
         },
         // 'ReturnValues' specifies if and how to return the item's attributes,
         // where ALL_NEW returns all attributes of the item after the update; you
