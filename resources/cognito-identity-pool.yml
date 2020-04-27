@@ -76,3 +76,5 @@ Resources:
 Outputs:
   IdentityPoolId:
     Value: !Ref NotesCognitoIdentityPool
+  AwsRegion:
+    Value: !Ref AWS::Region

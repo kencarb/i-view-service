@@ -19,6 +19,11 @@
     "jest": "^25.1.0"
   },
   "dependencies": {
+    "amazon-cognito-identity-js": "^4.2.2",
+    "asyncawait": "^3.0.0",
+    "crypto-js": "^4.0.0",
+    "node-fetch": "^2.6.0",
+    "promise": "^8.1.0",
     "serverless-pseudo-parameters": "^2.5.0",
     "serverless-stack-output": "^0.2.3",
     "uuid": "^7.0.1"
