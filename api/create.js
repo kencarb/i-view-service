@@ -9,8 +9,6 @@ module.exports.main = async(event, context) => {
         Item: {
             userid: event.requestContext.identity.cognitoIdentityId,
             noteid: uuid.v1(),
-            interviewee: data.interviewee,
-            skills: data.skills,
             content: data.content,
             attachment: data.attachment,
             createdAt: Date.now()
