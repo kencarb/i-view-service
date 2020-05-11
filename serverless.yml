@@ -44,7 +44,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:us-east-1:028821943969:table/notes-service-dev"
+      Resource: arn:aws:dynamodb:${self:provider.region}:#{AWS::AccountId}:table/${self:service}-${self:provider.stage}
   
   environment:
     NOTES_TABLE: ${self:service}-${self:provider.stage}
