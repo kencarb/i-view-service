@@ -5,17 +5,17 @@ Resources:
     Properties:
       AttributeDefinitions:
         -
-          AttributeName: "userid"
+          AttributeName: "userId"
           AttributeType: "S"   
         -
-          AttributeName: "noteid"
+          AttributeName: "noteId"
           AttributeType: "S"   
       KeySchema:
         -
-          AttributeName: "userid"
+          AttributeName: "userId"
           KeyType: "HASH"
         -
-          AttributeName: "noteid"
+          AttributeName: "noteId"
           KeyType: "RANGE"
       BillingMode: PAY_PER_REQUEST
       StreamSpecification:

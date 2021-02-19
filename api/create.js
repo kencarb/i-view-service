@@ -3,17 +3,20 @@ const dynamoDbLib = require("../libs/dynamodb-lib");
 const responseLib = require("../libs/response-lib");
 
 module.exports.main = async(event, context) => {
+    // Request body is JSON encoded string in 'event.body' 
     const data = JSON.parse(event.body);
+   
     const params = {
         TableName: process.env.NOTES_TABLE,
         Item: {
-            userid: event.requestContext.identity.cognitoIdentityId,
-            noteid: uuid.v1(),
+            // the attributes of item to be created
+            userId: event.requestContext.identity.cognitoIdentityId,
+            noteId: uuid.v1(),
             interviewee: data.interviewee,
             skills: data.skills,
             content: data.content,
             attachment: data.attachment,
-            createdAt: Date.now()
+            createdAt: Date.now(),
         }
     };
 

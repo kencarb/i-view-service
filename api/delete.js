@@ -5,8 +5,8 @@ module.exports.main = async(event, context) => {
     const params = {
         TableName: process.env.NOTES_TABLE,
         Key: {
-            userid: event.requestContext.identity.cognitoIdentityId,
-            noteid: event.pathParameters.id
+            userId: event.requestContext.identity.cognitoIdentityId,
+            noteId: event.pathParameters.id
         }
     };
 

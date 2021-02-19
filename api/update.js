@@ -5,9 +5,10 @@ module.exports.main = async(event, context) => {
     const data = JSON.parse(event.body);
     const params = {
         TableName: process.env.NOTES_TABLE,
+        // 'Key' defines DynamoDB partition and sort key of item 
         Key: {
-            userid: event.requestContext.identity.cognitoIdentityId,
-            noteid: event.pathParameters.id
+            userId: event.requestContext.identity.cognitoIdentityId,
+            noteId: event.pathParameters.id
         },
         // 'UpdateExpression' defines the attributes to be updated
         // 'ExpressionAttributeValues' defines the value in the update expression
