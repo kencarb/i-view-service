@@ -1,0 +1,25 @@
+Resources:
+  NotesCloudFrontDist:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+        - i-notes.kencarb.com
+        Origins:
+        - DomainName: i-notes.kencarb.com.s3-website-us-east-1.amazonaws.com
+          Id: myPublicS3Origin
+          S3OriginConfig:
+            OriginAccessIdentity: origin-access-identity/cloudfront/E2HTLYENSBZEFO
+        Enabled: true
+        DefaultRootObject: "index.html"
+        PriceClass: PriceClass_100
+        ViewerCertificate:
+          AcmCertificateArn: arn:aws:acm:us-east-1:028821943969:certificate/f6027d97-4efb-4e83-a338-9250ede38ccc
+          MinimumProtocolVersion: TLSv1.2_2018
+      Tags:
+      - Key: "App"
+        Value: "InterviewNotes"
+          
+Outputs:
+  CloudFrontDistribution:
+    Value: !Ref NotesCloudFrontDist
