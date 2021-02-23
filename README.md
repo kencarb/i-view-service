@@ -5,7 +5,7 @@ Based on: https://serverless-stack.com
 ...scroll down to The Basics, Build your first Serverless app using AWS Lambda and React.
 
 ### features:
-- deploys all components via CloudFormation, e.g. `i-view-service/serverless.yml` and `i-view-service/resources/*.yml`
+- deploys all components via Serverless to CloudFormation, e.g. `i-view-service/serverless.yml` and `i-view-service/resources/*.yml`
 - adds additional text field and pick list field to "The Basics" APIs
 
 ### to do's and caveats:
