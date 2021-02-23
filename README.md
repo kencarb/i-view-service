@@ -12,7 +12,9 @@ Based on: https://serverless-stack.com
 - to do: integrate CloudFront Distribution into CF stack
 - to do: integrate Route 53? ... not certain if this is desireable
 - caveat: this implementation skips the "Secrets and 3rd party APIs" section in "The Basics"
-- caveat: `npm test` is broken by auth routine
+- caveat: `npm test` does not work due to Cognito auth routine
+  - testing using mocks is feasible
+  - testing using `npx aws-api-gateway-cli-test` is feasible: https://www.npmjs.com/package/aws-api-gateway-cli-test
 
 ### deployment:
 - using https://aws.amazon.com/cloud9/ is practically a no brainer
