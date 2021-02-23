@@ -120,4 +120,4 @@ resources:
   - ${file(resources/cognito-user-pool.yml)}
   - ${file(resources/api-gateway-errors.yml)}
   - ${file(resources/cognito-identity-pool.yml)}
-  - ${file(resources/cloudfront-dist.yml)}
+  #- ${file(resources/cloudfront-dist.yml)}
