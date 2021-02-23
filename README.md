@@ -10,7 +10,7 @@ Based on: https://serverless-stack.com
 
 ### to do's and caveats:
 - to do: integrate CloudFront Distribution into CF stack
-- to do: integrate Route 53 ... not certain if this is desireable
+- to do: integrate Route 53? ... not certain if this is desireable
 - caveat: this implementation skips the "Secrets and 3rd party APIs" section in "The Basics"
 - caveat: `npm test` is broken by auth routine
 
