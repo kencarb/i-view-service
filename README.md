@@ -20,7 +20,7 @@ Based on: https://serverless-stack.com
 - using https://aws.amazon.com/cloud9/ is practically a no brainer
 - steps...
   - `npm install serverless -g`
-  - clone this repo
+  - clone this repo in `environment` path
   - `cd i-view-service/`
   - `npm install`
   - `[npm audit fix]`
